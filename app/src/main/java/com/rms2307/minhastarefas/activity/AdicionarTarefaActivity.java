@@ -1,8 +1,10 @@
-package com.rms2307.minhastarefas;
+package com.rms2307.minhastarefas.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.rms2307.minhastarefas.R;
 
 public class AdicionarTarefaActivity extends AppCompatActivity {
 
