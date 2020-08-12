@@ -9,6 +9,7 @@ import com.rms2307.minhastarefas.R;
 import com.rms2307.minhastarefas.adapter.TarefaAdapter;
 import com.rms2307.minhastarefas.helper.DBHelper;
 import com.rms2307.minhastarefas.helper.RecyclerItemClickListener;
+import com.rms2307.minhastarefas.helper.TarefaDAO;
 import com.rms2307.minhastarefas.model.Tarefa;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,16 +87,8 @@ public class MainActivity extends AppCompatActivity {
     public void carregaListaTarefas(){
 
         // Lista de tarefas
-        Tarefa tarefa1 =  new Tarefa();
-        tarefa1.setTarefa("Ir ao mercado");
-        tarefa1.setData("10/10/2020");
-        listTarefas.add(tarefa1);
-
-        Tarefa tarefa2 =  new Tarefa();
-        tarefa2.setTarefa("Ir a feira");
-        tarefa2.setData("20/10/2020");
-        listTarefas.add(tarefa2);
-
+        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+        listTarefas = tarefaDAO.listar();
 
         // Configurar um adapter
         tarefaAdapter = new TarefaAdapter(listTarefas);

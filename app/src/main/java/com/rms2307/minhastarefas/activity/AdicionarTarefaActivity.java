@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.rms2307.minhastarefas.R;
@@ -32,12 +33,19 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.itemSalvar:
                 TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
-                Tarefa tarefa = new Tarefa();
-                tarefa.setTarefa(editTarefa.toString());
-                tarefaDAO.salvar(tarefa);
+                String nomeTarefa = editTarefa.getText().toString();
+                if (!nomeTarefa.isEmpty()) {
+                    Tarefa tarefa = new Tarefa();
+                    tarefa.setTarefa(nomeTarefa);
+                    tarefaDAO.salvar(tarefa);
+                    finish(); // fechar activity
+                } else {
+                    Toast.makeText(this, "Digite uma tarefa!", Toast.LENGTH_LONG);
+                }
+
                 break;
         }
         return super.onOptionsItemSelected(item);
