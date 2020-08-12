@@ -27,7 +27,7 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.itemSalvar:
-                
+
                 break;
         }
         return super.onOptionsItemSelected(item);
