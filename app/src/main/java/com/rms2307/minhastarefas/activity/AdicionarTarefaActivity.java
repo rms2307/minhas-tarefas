@@ -43,7 +43,7 @@ public class AdicionarTarefaActivity extends AppCompatActivity {
                     tarefaDAO.salvar(tarefa);
                     finish(); // fechar activity
                 } else {
-                    Toast.makeText(this, "Digite uma tarefa!", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Digite uma tarefa!", Toast.LENGTH_LONG).show();
                 }
 
                 break;
