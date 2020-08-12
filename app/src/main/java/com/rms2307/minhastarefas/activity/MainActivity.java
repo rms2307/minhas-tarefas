@@ -1,11 +1,13 @@
 package com.rms2307.minhastarefas.activity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rms2307.minhastarefas.R;
 import com.rms2307.minhastarefas.adapter.TarefaAdapter;
+import com.rms2307.minhastarefas.helper.DBHelper;
 import com.rms2307.minhastarefas.helper.RecyclerItemClickListener;
 import com.rms2307.minhastarefas.model.Tarefa;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Configurar recycler
         recyclerListaTarefas = findViewById(R.id.recyclerListaTarefas);
 
         // Adicionar evento de clique
