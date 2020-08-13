@@ -27,10 +27,10 @@ public class TarefaDAO implements ITarefaDAO {
 
         ContentValues cv = new ContentValues();
         cv.put("nome", tarefa.getTarefa());
-        try{
+        try {
             escreve.insert(DBHelper.TABELA_TAREFAS, null, cv);
             Log.i("INFO", "Tarefa salva com sucesso");
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("INFO", "Erro ao salvar tarefa: " + e.getMessage());
             return false;
         }
@@ -44,10 +44,10 @@ public class TarefaDAO implements ITarefaDAO {
         cv.put("nome", tarefa.getTarefa());
         String[] args = {tarefa.getId().toString()};
 
-        try{
-            escreve.update(DBHelper.TABELA_TAREFAS,cv, "id=?",  args);
+        try {
+            escreve.update(DBHelper.TABELA_TAREFAS, cv, "id=?", args);
             Log.i("INFO", "Tarefa atualizada com sucesso");
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("INFO", "Erro ao atualizar tarefa: " + e.getMessage());
             return false;
         }
@@ -56,7 +56,16 @@ public class TarefaDAO implements ITarefaDAO {
 
     @Override
     public boolean deletar(Tarefa tarefa) {
-        return false;
+        String[] args = {tarefa.getId().toString()};
+
+        try {
+            escreve.delete(DBHelper.TABELA_TAREFAS, "id=?", args);
+            Log.i("INFO", "Tarefa excluida com sucesso");
+        } catch (Exception e) {
+            Log.e("INFO", "Erro ao excluir tarefa: " + e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -66,7 +75,7 @@ public class TarefaDAO implements ITarefaDAO {
         String sql = "SELECT * FROM " + DBHelper.TABELA_TAREFAS + ";";
         Cursor c = le.rawQuery(sql, null);
 
-        while (c.moveToNext()){
+        while (c.moveToNext()) {
             Tarefa tarefa = new Tarefa();
 
             Long id = c.getLong(c.getColumnIndex("id"));
