@@ -54,7 +54,14 @@ public class MainActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                                Log.i("clique", "onItemClick");
+                                // Recuperar tarefa selecionada
+                                Tarefa tarefaSelecionada = listTarefas.get(position);
+
+                                // Envia tarefa para tela adicionar tarefa
+                                Intent intent = new Intent(MainActivity.this, AdicionarTarefaActivity.class);
+                                intent.putExtra("tarefaSelecionada", tarefaSelecionada);
+
+                                startActivity(intent);
                             }
 
                             @Override
@@ -86,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregaListaTarefas(){
 
-        // Lista de tarefas
+        // Recupera lista do bando de dados
         TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
         listTarefas = tarefaDAO.listar();
 
