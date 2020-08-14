@@ -54,11 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void carregaListaTarefas() {
+    public void carregarListaTarefas() {
 
-        // Recupera lista do banco de dados
-        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
-        listTarefas = tarefaDAO.listar();
+       recuperarListaTarefasBancoDados();
 
         // Configurar um adapter
         tarefaAdapter = new TarefaAdapter(listTarefas);
@@ -71,10 +69,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerTarefas.setAdapter(tarefaAdapter);
     }
 
+    public void recuperarListaTarefasBancoDados(){
+        TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
+        listTarefas = tarefaDAO.listar();
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
-        carregaListaTarefas();
+        carregarListaTarefas();
     }
 
     @Override
