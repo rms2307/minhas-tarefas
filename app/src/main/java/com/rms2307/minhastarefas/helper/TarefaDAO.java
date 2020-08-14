@@ -9,6 +9,7 @@ import android.util.Log;
 import com.rms2307.minhastarefas.model.Tarefa;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class TarefaDAO implements ITarefaDAO {
@@ -74,6 +75,7 @@ public class TarefaDAO implements ITarefaDAO {
     public List<Tarefa> listar() {
 
         List<Tarefa> tarefas = new ArrayList<>();
+
         String sql = "SELECT * FROM " + DBHelper.TABELA_TAREFAS + ";";
         Cursor c = le.rawQuery(sql, null);
 
@@ -87,9 +89,33 @@ public class TarefaDAO implements ITarefaDAO {
             tarefa.setId(id);
             tarefa.setTarefa(nomeTarefa);
             tarefa.setStatus(status);
+
             tarefas.add(tarefa);
         }
-
         return tarefas;
+    }
+
+    public List<Tarefa> listarTarefasPendentes() {
+        List<Tarefa> tarefas = listar();
+        List<Tarefa> tarefasPendentes = new ArrayList<>();
+
+        for (Tarefa tarefa : tarefas) {
+            if(tarefa.getStatus().equals("P")){
+                tarefasPendentes.add(tarefa);
+            }
+        }
+        return tarefasPendentes;
+    }
+
+    public List<Tarefa> listarTarefasConcluidas() {
+        List<Tarefa> tarefas = listar();
+        List<Tarefa> tarefasConcluidas = new ArrayList<>();
+
+        for (Tarefa tarefa : tarefas) {
+            if(tarefa.getStatus().equals("C")){
+                tarefasConcluidas.add(tarefa);
+            }
+        }
+        return tarefasConcluidas;
     }
 }

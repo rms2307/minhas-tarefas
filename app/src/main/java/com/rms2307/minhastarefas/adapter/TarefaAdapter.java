@@ -81,7 +81,6 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
 
                 dialog.create();
                 dialog.show();
-
                 return true;
             }
         });

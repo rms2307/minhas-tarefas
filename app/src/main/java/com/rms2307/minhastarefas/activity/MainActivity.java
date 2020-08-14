@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerTarefas, recyclerTarefasConcluidas;
     private TarefaAdapter tarefaAdapter;
     private TarefaConcluidaAdapter tarefaConcluidaAdapter;
+    private List<Tarefa> tarefasPendentes = new ArrayList<>();
+    private List<Tarefa> tarefasConcluidas = new ArrayList<>();
     private List<Tarefa> listTarefas = new ArrayList<>();
     private Tarefa tarefaSelecionada;
 
@@ -56,14 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void carregarListaTarefas() {
+    public void carregarListaTarefasPendentes() {
+        tarefaAdapter = new TarefaAdapter(tarefasPendentes);
 
-        recuperarTarefasBancoDados();
-
-        // Configurar um adapter
-        tarefaAdapter = new TarefaAdapter(listTarefas);
-
-        // Configurar RecyclerView
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerTarefas.setLayoutManager(layoutManager);
         recyclerTarefas.setHasFixedSize(true);
@@ -83,13 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void recuperarTarefasBancoDados(){
         TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
-        listTarefas = tarefaDAO.listar();
+        tarefasPendentes = tarefaDAO.listarTarefasPendentes();
+        tarefasConcluidas = tarefaDAO.listarTarefasConcluidas();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        carregarListaTarefas();
+        recuperarTarefasBancoDados();
+        carregarListaTarefasPendentes();
         carregarListaTarefasConcluidas();
     }
 
