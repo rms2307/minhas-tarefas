@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void carregarListaTarefasConcluidas(){
-        tarefaConcluidaAdapter = new TarefaConcluidaAdapter();
+        tarefaConcluidaAdapter = new TarefaConcluidaAdapter(tarefasConcluidas);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerTarefasConcluidas.setLayoutManager(layoutManager);
