@@ -22,7 +22,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String sql = "CREATE TABLE IF NOT EXISTS " + TABELA_TAREFAS +
                 " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "nome TEXT NOT NULL);";
+                "nome TEXT NOT NULL," +
+                "status TEXT NOT NULL);";
         try{
             sqLiteDatabase.execSQL(sql);
             Log.i("INFO DB ", "Sucesso ao criar tabela");
