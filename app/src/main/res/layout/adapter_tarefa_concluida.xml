@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -13,7 +12,7 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/checkTarefa"
+            android:id="@+id/checkTarefaConcluida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
@@ -21,7 +20,7 @@
             android:focusable="auto" />
 
         <TextView
-            android:id="@+id/textViewTarefa"
+            android:id="@+id/textViewTarefaConcluida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -32,7 +31,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewData"
+            android:id="@+id/textViewDataConcluida"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -44,5 +43,7 @@
             android:textStyle="italic" />
 
     </LinearLayout>
+
+
 
 </LinearLayout>

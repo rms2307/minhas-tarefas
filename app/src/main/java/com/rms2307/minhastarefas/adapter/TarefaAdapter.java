@@ -110,7 +110,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
 
             tarefa = itemView.findViewById(R.id.textViewTarefa);
             data = itemView.findViewById(R.id.textViewData);
-            checkBox = itemView.findViewById(R.id.checkTarefaConcluida);
+            checkBox = itemView.findViewById(R.id.checkTarefa);
         }
     }
 }

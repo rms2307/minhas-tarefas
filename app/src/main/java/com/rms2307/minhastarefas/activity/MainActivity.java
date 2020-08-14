@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.rms2307.minhastarefas.R;
 import com.rms2307.minhastarefas.adapter.TarefaAdapter;
+import com.rms2307.minhastarefas.adapter.TarefaConcluidaAdapter;
 import com.rms2307.minhastarefas.helper.TarefaDAO;
 import com.rms2307.minhastarefas.model.Tarefa;
 
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerTarefas, recyclerTarefasConcluidas;
     private TarefaAdapter tarefaAdapter;
+    private TarefaConcluidaAdapter tarefaConcluidaAdapter;
     private List<Tarefa> listTarefas = new ArrayList<>();
     private Tarefa tarefaSelecionada;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void carregarListaTarefas() {
 
-       recuperarListaTarefasBancoDados();
+        recuperarTarefasBancoDados();
 
         // Configurar um adapter
         tarefaAdapter = new TarefaAdapter(listTarefas);
@@ -69,7 +71,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerTarefas.setAdapter(tarefaAdapter);
     }
 
-    public void recuperarListaTarefasBancoDados(){
+    public void carregarListaTarefasConcluidas(){
+        tarefaConcluidaAdapter = new TarefaConcluidaAdapter();
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerTarefasConcluidas.setLayoutManager(layoutManager);
+        recyclerTarefasConcluidas.setHasFixedSize(true);
+        recyclerTarefasConcluidas.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        recyclerTarefasConcluidas.setAdapter(tarefaConcluidaAdapter);
+    }
+
+    public void recuperarTarefasBancoDados(){
         TarefaDAO tarefaDAO = new TarefaDAO(getApplicationContext());
         listTarefas = tarefaDAO.listar();
     }
@@ -78,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         carregarListaTarefas();
+        carregarListaTarefasConcluidas();
     }
 
     @Override
