@@ -7,6 +7,7 @@ public class Tarefa implements Serializable {
     private Long id;
     private String tarefa;
     private String data;
+    private String status = "P";
 
     public Tarefa() {
     }
@@ -33,5 +34,13 @@ public class Tarefa implements Serializable {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

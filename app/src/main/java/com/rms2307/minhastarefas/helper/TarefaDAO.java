@@ -27,6 +27,7 @@ public class TarefaDAO implements ITarefaDAO {
 
         ContentValues cv = new ContentValues();
         cv.put("nome", tarefa.getTarefa());
+        cv.put("status", tarefa.getStatus());
         try {
             escreve.insert(DBHelper.TABELA_TAREFAS, null, cv);
             Log.i("INFO", "Tarefa salva com sucesso");
@@ -42,6 +43,7 @@ public class TarefaDAO implements ITarefaDAO {
     public boolean atualizar(Tarefa tarefa) {
         ContentValues cv = new ContentValues();
         cv.put("nome", tarefa.getTarefa());
+        cv.put("status", tarefa.getStatus());
         String[] args = {tarefa.getId().toString()};
 
         try {
@@ -80,9 +82,11 @@ public class TarefaDAO implements ITarefaDAO {
 
             Long id = c.getLong(c.getColumnIndex("id"));
             String nomeTarefa = c.getString(c.getColumnIndex("nome"));
+            String status = c.getString(c.getColumnIndex("status"));
 
             tarefa.setId(id);
             tarefa.setTarefa(nomeTarefa);
+            tarefa.setStatus(status);
             tarefas.add(tarefa);
         }
 
