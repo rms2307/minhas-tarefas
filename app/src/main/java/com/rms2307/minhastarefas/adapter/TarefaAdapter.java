@@ -38,7 +38,7 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final Tarefa tarefa = listTarefas.get(position);
 
         holder.tarefa.setText(tarefa.getTarefa());
@@ -85,10 +85,17 @@ public class TarefaAdapter extends RecyclerView.Adapter<TarefaAdapter.MyViewHold
             }
         });
 
+        // Marcar tarefa como concluida
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Tarefa", tarefa.getTarefa());
+                TarefaDAO tarefaDAO = new TarefaDAO(view.getContext());
+                if (holder.checkBox.isChecked()) {
+                    tarefa.setStatus("C");
+                    listTarefas.remove(position);
+                    notifyItemRemoved(position);
+                    tarefaDAO.atualizar(tarefa);
+                }
             }
         });
     }

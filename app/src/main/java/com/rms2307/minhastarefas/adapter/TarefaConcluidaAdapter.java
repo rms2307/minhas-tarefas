@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rms2307.minhastarefas.R;
+import com.rms2307.minhastarefas.helper.TarefaDAO;
 import com.rms2307.minhastarefas.model.Tarefa;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class TarefaConcluidaAdapter extends RecyclerView.Adapter<TarefaConcluidaAdapter.MyViewHolder> {
 
     private List<Tarefa> tarefas;
+    private RecyclerView recyclerView;
 
     public TarefaConcluidaAdapter(List<Tarefa> tarefas) {
         this.tarefas = tarefas;
@@ -31,11 +33,24 @@ public class TarefaConcluidaAdapter extends RecyclerView.Adapter<TarefaConcluida
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Tarefa tarefa = tarefas.get(position);
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        final Tarefa tarefa = tarefas.get(position);
 
         holder.tarefaConcluida.setText(tarefa.getTarefa());
         holder.dataConcluida.setText(tarefa.getData());
+
+        holder.checkBoxConcluida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TarefaDAO tarefaDAO = new TarefaDAO(view.getContext());
+                if(!holder.checkBoxConcluida.isChecked()){
+                    tarefa.setStatus("P");
+                    tarefas.remove(position);
+                    notifyItemRemoved(position);
+                    tarefaDAO.atualizar(tarefa);
+                }
+            }
+        });
     }
 
     @Override
